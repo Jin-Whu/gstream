@@ -1,0 +1,5 @@
+include(ExternalProject)
+include(${CMAKE_SOURCE_DIR}/cmake/rtklib.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/libevent.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/pugixml.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/spdlog.cmake)

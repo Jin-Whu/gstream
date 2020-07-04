@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system>
+	<log>
+		<stdout>0</stdout>
+		<txt>0</txt>
+		<bin>0</bin>
+	</log>
+
+	<service>
+		<id>01</id>
+		<manager>
+			<id>01</id>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+		</manager>
+
+		<manager>
+			<id>02</id>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+		</manager>
+	</service>
+
+	<service>
+		<id>02</id>
+		<manager>
+			<id>01</id>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+		</manager>
+
+		<manager>
+			<id>02</id>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+			<rover>//user:password@host:port/mnt decoder lat lon alt nmea protocol</rover>
+		</manager>
+	</service>
+
+</system>
