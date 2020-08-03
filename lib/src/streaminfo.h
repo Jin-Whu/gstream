@@ -12,6 +12,7 @@ namespace stream
         {
             TYPE_NONE,
             TYPE_TCP,
+            TYPE_UDP,
             TYPE_NTRIP
         };
 

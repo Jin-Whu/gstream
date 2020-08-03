@@ -22,6 +22,7 @@ namespace stream
     class StreamContext
     {
         friend class StreamTcp;
+        friend class StreamUdp;
         friend class StreamNtrip;
 
         enum class STATUS

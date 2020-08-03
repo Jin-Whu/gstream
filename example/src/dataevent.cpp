@@ -10,7 +10,7 @@ namespace stream
             int week = 0;
             double ws = 0.;
             ws = time2gpst(obs.t, &week);
-            printf("%s %d %f %zu\n", data.obs_id.c_str(), week, ws, obs.size());
+            printf("%s %d %f %zu\n", data.sta_id.c_str(), week, ws, obs.size());
         }
         else if (data.datatype == GNSSData::GNSSDATA_TYPE::TYPE_EPH)
         {

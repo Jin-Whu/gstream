@@ -1,7 +1,7 @@
 #include <spdlog/pattern_formatter.h>
-#include "ephstore.h"
 #include "rtcmdecode.h"
 #include "streamtcp.h"
+#include "streamudp.h"
 #include "streamntrip.h"
 #include "streammanager.h"
 #include "streamcontext.h"
@@ -17,6 +17,9 @@ namespace stream
             break;
         case StreamInfo::StreamType::TYPE_NTRIP:
             m_stream = std::make_shared<StreamNtrip>(this);
+            break;
+        case StreamInfo::StreamType::TYPE_UDP:
+            m_stream = std::make_shared<StreamUdp>(this);
             break;
         default:
             m_stream = nullptr;
@@ -94,16 +97,16 @@ namespace stream
 
             if (ret == DECODE_RET::TYPE_EPH)
             {
-                int sys = satsys(data.sat_id, nullptr);
-                if (sys == SYS_GLO) EphStore::put(std::move(data.geph));
-                else EphStore::put(std::move(data.eph));
-
                 if (streamev) streamev->event_cb(data);
             }
             else if (ret == DECODE_RET::TYPE_OBS)
             {
-                data.obs_id = m_info.mnt;
+                data.sta_id = m_info.mnt;
 
+                if (streamev) streamev->event_cb(data);
+            }
+            else if (ret == DECODE_RET::TYPE_STA)
+            {
                 if (streamev) streamev->event_cb(data);
             }
             size -= rsz;

@@ -39,13 +39,13 @@ namespace stream
 
         GNSSData() :StreamData(DATATYPE::TYPE_GNSSDATA) {}
 
-        GNSSDATA_TYPE datatype = GNSSDATA_TYPE::TYPE_NONE;
-        ObsData obs;
-        eph_t eph;
-        geph_t geph;
-        unsigned sat_id;
-        std::string obs_id;
-        sta_t sta;
+        GNSSDATA_TYPE datatype = GNSSDATA_TYPE::TYPE_NONE; ///< GNSS datatype
+        ObsData obs; ///< observation
+        eph_t eph; ///< ephemeris
+        geph_t geph; ///< GLONASS ephemeris
+        sta_t sta; ///< station information
+        unsigned sat_id; ///< satellite id
+        std::string sta_id; ///< station id
     };
 }
 

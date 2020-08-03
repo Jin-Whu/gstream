@@ -5,7 +5,6 @@ target_sources(${PROJECT_NAME} PUBLIC
                                ${PROJECT_SOURCE_DIR}/src/stream.h
                                ${PROJECT_SOURCE_DIR}/src/streamevent.h
                                ${PROJECT_SOURCE_DIR}/src/gnssdata.h
-                               ${PROJECT_SOURCE_DIR}/src/ephstore.h
                                PRIVATE
                                ${PROJECT_SOURCE_DIR}/src/stream.cpp
                                ${PROJECT_SOURCE_DIR}/src/streamsystem.h
@@ -21,9 +20,10 @@ target_sources(${PROJECT_NAME} PUBLIC
                                ${PROJECT_SOURCE_DIR}/src/istream.h
                                ${PROJECT_SOURCE_DIR}/src/streamtcp.h
                                ${PROJECT_SOURCE_DIR}/src/streamtcp.cpp
+                               ${PROJECT_SOURCE_DIR}/src/streamudp.h
+                               ${PROJECT_SOURCE_DIR}/src/streamudp.cpp
                                ${PROJECT_SOURCE_DIR}/src/streamntrip.h
                                ${PROJECT_SOURCE_DIR}/src/streamntrip.cpp
-                               ${PROJECT_SOURCE_DIR}/src/ephstore.cpp
                                ${PROJECT_SOURCE_DIR}/src/streamcfg.h
                                ${PROJECT_SOURCE_DIR}/src/streamcfg.cpp
                                ${PROJECT_SOURCE_DIR}/src/streamlog.h
