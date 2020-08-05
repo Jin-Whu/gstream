@@ -96,7 +96,11 @@ namespace stream
 
         conn->m_context->m_retry = 0;
 
-        conn->m_context->m_buffsz = recvfrom(fd, conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, conn->m_addr->ai_addr, &(conn->m_addr->ai_addrlen));
+        #ifdef _WIN32
+        conn->m_context->m_buffsz = recvfrom(fd, (char*)conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, nullptr, nullptr);
+        #else
+        conn->m_context->m_buffsz = recvfrom(fd, conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, nullptr, nullptr);
+        #endif
 
         conn->m_context->decode();
     }
