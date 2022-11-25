@@ -56,7 +56,7 @@ namespace stream
         std::string m_id;
         const StreamManager *m_manager; /// < belong to manager
         std::shared_ptr<IStream> m_stream;   /// < stream
-        std::shared_ptr<spdlog::logger> m_binlog; /// < stream binary logger
+        std::shared_ptr<StreamBinLog> m_binlog; /// < stream binary logger
         std::shared_ptr<StreamDecode> m_decoder;  /// < decoder
         unsigned char m_buff[4096];       /// < buff
         size_t m_buffsz;                  /// < buff size

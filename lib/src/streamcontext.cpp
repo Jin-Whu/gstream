@@ -1,4 +1,3 @@
-#include <spdlog/pattern_formatter.h>
 #include "rtcmdecode.h"
 #include "streamtcp.h"
 #include "streamudp.h"
@@ -41,10 +40,8 @@ namespace stream
 
         if ((StreamLog::flag() & StreamLog::BIN) == StreamLog::BIN)
         {
-            m_binlog = spdlog::daily_logger_mt(m_id, "bins/" + m_id + ".bin", 0, 0);
-            auto formatter = std::make_unique<spdlog::pattern_formatter>(spdlog::pattern_time_type::local, "");
-            formatter->set_pattern("%v");
-            m_binlog->set_formatter(std::move(formatter));
+            m_binlog = std::make_shared<StreamBinLog>();
+            m_binlog->init();
         }
 
         if (m_manager)
@@ -97,17 +94,20 @@ namespace stream
 
             if (ret == DECODE_RET::TYPE_EPH)
             {
-                if (streamev) streamev->event_cb(data);
+                if (streamev)
+                    streamev->event_cb(data);
             }
             else if (ret == DECODE_RET::TYPE_OBS)
             {
                 data.sta_id = m_info.mnt;
 
-                if (streamev) streamev->event_cb(data);
+                if (streamev)
+                    streamev->event_cb(data);
             }
             else if (ret == DECODE_RET::TYPE_STA)
             {
-                if (streamev) streamev->event_cb(data);
+                if (streamev)
+                    streamev->event_cb(data);
             }
             size -= rsz;
             p += rsz;

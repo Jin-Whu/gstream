@@ -37,6 +37,10 @@ target_sources(${PROJECT_NAME} PUBLIC
                                ${PROJECT_SOURCE_DIR}/src/systeminfo.h
                                ${PROJECT_SOURCE_DIR}/src/managerinfo.h)
 
+if(ENABLE_STREAM_LOG)
 target_link_libraries(${PROJECT_NAME} PRIVATE event pugixml spdlog::spdlog PUBLIC rtk)
+else()
+target_link_libraries(${PROJECT_NAME} PRIVATE event pugixml PUBLIC rtk)
+endif()
 target_include_directories(${PROJECT_NAME} INTERFACE ${PROJECT_SOURCE_DIR}/src)
 set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})

@@ -31,6 +31,7 @@ set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # include external project
+option(ENABLE_STREAM_LOG "enable stream log" OFF)
 include(${PROJECT_SOURCE_DIR}/cmake/external.cmake)
 add_subdirectory(${PROJECT_SOURCE_DIR}/lib)
 
