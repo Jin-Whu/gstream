@@ -9,7 +9,7 @@ namespace stream
     class StreamTcp : public IStream
     {
     public:
-        StreamTcp(StreamContext *context) :IStream(context), m_bev(nullptr) {}
+        StreamTcp(StreamContext *context) :IStream(context), m_bev(NULL) {}
         ~StreamTcp() = default;
 
     public:

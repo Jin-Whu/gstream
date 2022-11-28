@@ -17,13 +17,13 @@ namespace stream
         if (!bev) return;
 
         bufferevent_setwatermark(bev, EV_READ, 128, 0);
-        bufferevent_setcb(bev, read_cb, nullptr, event_cb, this);
+        bufferevent_setcb(bev, read_cb, NULL, event_cb, this);
         bufferevent_enable(bev, EV_READ);
 
         timeval tv {30, 0};
-        bufferevent_set_timeouts(bev, &tv, nullptr);
+        bufferevent_set_timeouts(bev, &tv, NULL);
 
-        if (bufferevent_socket_connect_hostname(bev, nullptr, AF_INET, m_context->m_info.host.c_str(), m_context->m_info.port) < 0)
+        if (bufferevent_socket_connect_hostname(bev, NULL, AF_INET, m_context->m_info.host.c_str(), m_context->m_info.port) < 0)
         {
             bufferevent_free(bev);
             return;
@@ -37,13 +37,13 @@ namespace stream
         if (m_bev)
         {
             bufferevent_free(m_bev);
-            m_bev = nullptr;
+            m_bev = NULL;
         }
 
         if (m_context->m_reconnect_timer)
         {
             event_free(m_context->m_reconnect_timer);
-            m_context->m_reconnect_timer = nullptr;
+            m_context->m_reconnect_timer = NULL;
         }
 
         m_context->m_status = StreamContext::STATUS::STATUS_CLOSED;
@@ -107,7 +107,7 @@ namespace stream
         if (conn->m_context->m_reconnect_timer)
         {
             event_free(conn->m_context->m_reconnect_timer);
-            conn->m_context->m_reconnect_timer = nullptr;
+            conn->m_context->m_reconnect_timer = NULL;
         }
 
         if (conn->m_context->m_status == StreamContext::STATUS::STATUS_CLOSED)

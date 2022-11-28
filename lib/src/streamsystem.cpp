@@ -19,8 +19,8 @@ namespace stream
 
         LOG_INFO("stream system: stream system starting");
 
-        for (auto &service : m_services)
-            service.second->start();
+        for (auto service = m_services.begin(); service != m_services.end(); ++service)
+            service->second->start();
         
         m_status = STATUS::TYPE_RUNNING;
 
@@ -32,8 +32,8 @@ namespace stream
         if (m_status == STATUS::TYPE_RUNNING)
         {
             LOG_INFO("stream system: stream system stoping");
-            for (auto &service : m_services)
-                service.second->stop();
+            for (auto service = m_services.begin(); service != m_services.end(); ++service)
+                service->second->stop();
             m_status = STATUS::TYPE_STOPPED;
             LOG_INFO("stream system: stream system stopped");
         }
@@ -41,9 +41,9 @@ namespace stream
 
     void StreamSystem::init()
     {
-        for (const auto &service : m_info.services)
+        for (auto service = m_info.services.begin(); service != m_info.services.end(); ++service)
         {
-            m_services[service.id] = std::make_shared<StreamService>(service);
+            m_services[service->id] = std::make_shared<StreamService>(*service);
         }
     }
 
@@ -52,6 +52,6 @@ namespace stream
         if (m_services.count(id))
             return m_services[id];
         else
-            return nullptr;
+            return std::shared_ptr<StreamService>();
     }
 }

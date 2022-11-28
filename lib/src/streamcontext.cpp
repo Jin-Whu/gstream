@@ -7,7 +7,7 @@
 
 namespace stream
 {
-    StreamContext::StreamContext(const std::string &id, const StreamInfo &info, const StreamManager *manager) :m_id(id), m_info(info), m_status(STATUS::STATUS_CLOSED), m_manager(manager), m_evbase(nullptr), m_reconnect_timer(nullptr), m_retry(0)
+    StreamContext::StreamContext(const std::string &id, const StreamInfo &info, const StreamManager *manager) :m_id(id), m_info(info), m_status(STATUS::STATUS_CLOSED), m_manager(manager), m_evbase(NULL), m_reconnect_timer(NULL), m_retry(0)
     {
         switch (m_info.stype)
         {
@@ -21,7 +21,6 @@ namespace stream
             m_stream = std::make_shared<StreamUdp>(this);
             break;
         default:
-            m_stream = nullptr;
             break;
         }
 
@@ -34,7 +33,6 @@ namespace stream
             m_decoder = std::make_shared<RtcmDecode>(RtcmDecode::VERSION::VER_3);
             break;
         default:
-            m_decoder = nullptr;
             break;
         }
 
@@ -73,7 +71,7 @@ namespace stream
 
     void StreamContext::decode()
     {
-        std::shared_ptr<StreamEvent> streamev = nullptr;
+        std::shared_ptr<StreamEvent> streamev;
         if (m_manager)
         {
             streamev = m_manager->streamev();

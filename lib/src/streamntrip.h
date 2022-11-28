@@ -10,7 +10,7 @@ namespace stream
     class StreamNtrip : public IStream
     {
     public:
-        StreamNtrip(StreamContext *context) :IStream(context), m_bev(nullptr) {}
+        StreamNtrip(StreamContext *context) :IStream(context), m_bev(NULL) {}
         ~StreamNtrip() = default;
 
     public:

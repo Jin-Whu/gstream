@@ -17,7 +17,7 @@ namespace stream
 {
     class StreamManager;
 
-    constexpr unsigned MAX_RETRY = 5;
+    const unsigned MAX_RETRY = 5;
 
     class StreamContext
     {

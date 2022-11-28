@@ -19,19 +19,20 @@ int main(int argc, char **argv)
     }
 
     const auto& id = stream.id();
-    for (const auto &service_id : id)
+    for (auto service_id = id.begin(); service_id != id.end(); ++service_id)
     {
-        for (const auto &manager_id : service_id.second)
+        for (auto manager_id = service_id->second.begin(); manager_id != service_id->second.end(); ++manager_id)
         {
             std::shared_ptr<stream::DataEvent> ev = std::make_shared<stream::DataEvent>();
-            stream.set_event(service_id.first, manager_id, ev);
+            stream.set_event(service_id->first, *manager_id, ev);
         }
     }
     stream.start();
 
     while (true)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        // std::this_thread::sleep_for(std::chrono::seconds(1));
+        sleep(1);
     }
     return 0;
 }

@@ -3,9 +3,9 @@
 namespace stream
 {
 #ifdef STREAM_LOG
-    std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> StreamLog::console_sink = nullptr;
-    std::shared_ptr<spdlog::sinks::daily_file_sink_mt> StreamLog::file_sink = nullptr;
-    std::shared_ptr<spdlog::logger> StreamLog::logger = nullptr;
+    std::shared_ptr<spdlog::sinks::stdout_color_sink_mt> StreamLog::console_sink = NULL;
+    std::shared_ptr<spdlog::sinks::daily_file_sink_mt> StreamLog::file_sink = NULL;
+    std::shared_ptr<spdlog::logger> StreamLog::logger = NULL;
 #endif
     unsigned StreamLog::logflag = StreamLog::NONE;
 

@@ -22,7 +22,7 @@ namespace stream
         virtual ~RtcmDecode();
 
     public:
-        DECODE_RET decode(const unsigned char *buff, size_t size, size_t &rsz, GNSSData &data) override;
+        DECODE_RET decode(const unsigned char *buff, size_t size, size_t &rsz, GNSSData &data);
     
     protected:
         void rtcm2obs(const rtcm_t &rtcm, GNSSData &data);

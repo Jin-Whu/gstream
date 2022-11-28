@@ -6,7 +6,7 @@
 #ifndef STREAM_STREAMMANAGER_H_
 #define STREAM_STREAMMANAGER_H_
 
-#include <future>
+#include <thread>
 #include <memory>
 #include <string>
 #include <unordered_map>
@@ -54,7 +54,7 @@ namespace stream
         std::string m_id;
         STATUS m_status;
         ManagerInfo m_info;
-        std::future<void> m_future;
+        std::thread m_thread;
         event_base *m_evbase;
         std::shared_ptr<StreamEvent> m_streamev;
         std::unordered_map<std::string, std::shared_ptr<StreamContext>> m_contexts_rover; ///< all stream context (key: rover.id)

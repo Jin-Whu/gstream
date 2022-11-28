@@ -9,7 +9,7 @@ namespace stream
     class StreamUdp : public IStream
     {
     public:
-        StreamUdp(StreamContext *context) :IStream(context), m_ev(nullptr), m_addr(nullptr) {}
+        StreamUdp(StreamContext *context) :IStream(context), m_ev(NULL), m_addr(NULL) {}
         ~StreamUdp() = default;
 
     public:

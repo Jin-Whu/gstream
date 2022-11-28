@@ -24,8 +24,8 @@ namespace stream
 
         LOG_INFO("stream service: [id]:{} starting", m_id);
 
-        for (auto &manager : m_managers)
-            manager.second->start();
+        for (auto manager = m_managers.begin(); manager != m_managers.end(); ++manager)
+            manager->second->start();
         m_status = STATUS::TYPE_RUNNING;
 
         LOG_INFO("stream service: [id]:{} started", m_id);
@@ -37,8 +37,8 @@ namespace stream
         {
             LOG_INFO("stream service: [id]:{} stopping", m_id);
 
-            for (auto &manager : m_managers)
-               manager.second->stop();
+            for (auto manager = m_managers.begin(); manager != m_managers.end(); ++manager)
+               manager->second->stop();
             m_status = STATUS::TYPE_STOPPED;
 
             LOG_INFO("stream service: [id]:{} stopped", m_id);
@@ -47,9 +47,9 @@ namespace stream
 
     void StreamService::init()
     {
-        for (const auto &manager : m_info.managers)
+        for (auto manager = m_info.managers.begin(); manager != m_info.managers.end(); ++manager)
         {
-            m_managers[manager.id] = std::make_shared<StreamManager>(manager);
+            m_managers[manager->id] = std::make_shared<StreamManager>(*manager);
         }
     }
 
@@ -58,6 +58,6 @@ namespace stream
         if (m_managers.count(id))
             return m_managers[id];
         else
-            return nullptr;
+            return std::shared_ptr<StreamManager>();
     }
 }

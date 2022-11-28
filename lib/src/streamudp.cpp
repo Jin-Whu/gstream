@@ -67,20 +67,20 @@ namespace stream
         if (m_context->m_reconnect_timer)
         {
             event_free(m_context->m_reconnect_timer);
-            m_context->m_reconnect_timer = nullptr;
+            m_context->m_reconnect_timer = NULL;
         }
 
         if (m_addr)
         {
             evutil_freeaddrinfo(m_addr);
-            m_addr = nullptr;
+            m_addr = NULL;
         }
 
         if (m_ev)
         {
             evutil_closesocket(event_get_fd(m_ev));
             event_free(m_ev);
-            m_ev = nullptr;
+            m_ev = NULL;
         }
 
         m_context->m_status = StreamContext::STATUS::STATUS_CLOSED;
@@ -97,9 +97,9 @@ namespace stream
         conn->m_context->m_retry = 0;
 
         #ifdef _WIN32
-        conn->m_context->m_buffsz = recvfrom(fd, (char*)conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, nullptr, nullptr);
+        conn->m_context->m_buffsz = recvfrom(fd, (char*)conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, NULL, NULL);
         #else
-        conn->m_context->m_buffsz = recvfrom(fd, conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, nullptr, nullptr);
+        conn->m_context->m_buffsz = recvfrom(fd, conn->m_context->m_buff, sizeof(conn->m_context->m_buff), 0, NULL, NULL);
         #endif
 
         conn->m_context->decode();
@@ -139,7 +139,7 @@ namespace stream
         if (conn->m_context->m_reconnect_timer)
         {
             event_free(conn->m_context->m_reconnect_timer);
-            conn->m_context->m_reconnect_timer = nullptr;
+            conn->m_context->m_reconnect_timer = NULL;
         }
 
         if (conn->m_context->m_status == StreamContext::STATUS::STATUS_CLOSED)

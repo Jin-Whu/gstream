@@ -13,7 +13,7 @@ namespace stream
     struct ObsData
     {
         ObsData(size_t n = 0) :data(n), t{} {}
-        ObsData(const obs_t &obs) :ObsData(obs.n)
+        ObsData(const obs_t &obs) :data(obs.n), t{}
         {
             for (int i = 0; i != obs.n; ++i)
             {
@@ -37,9 +37,9 @@ namespace stream
             TYPE_STA
         };
 
-        GNSSData() :StreamData(DATATYPE::TYPE_GNSSDATA) {}
+        GNSSData() :StreamData(DATATYPE::TYPE_GNSSDATA),datatype(GNSSDATA_TYPE::TYPE_NONE) {}
 
-        GNSSDATA_TYPE datatype = GNSSDATA_TYPE::TYPE_NONE; ///< GNSS datatype
+        GNSSDATA_TYPE datatype; ///< GNSS datatype
         ObsData obs; ///< observation
         eph_t eph; ///< ephemeris
         geph_t geph; ///< GLONASS ephemeris

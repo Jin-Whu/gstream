@@ -12,6 +12,7 @@
 namespace stream
 {
     class StreamSystem;
+    typedef std::map<std::string, std::set<std::string>> StreamID;
 
     class Stream
     {
@@ -21,7 +22,6 @@ namespace stream
             TYPE_STOPPED
         };
 
-        using StreamID = std::map<std::string, std::set<std::string>>;
 
     public:
         Stream();

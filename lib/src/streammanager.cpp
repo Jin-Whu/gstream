@@ -5,7 +5,7 @@
 
 namespace stream
 {
-    StreamManager::StreamManager(const ManagerInfo &info) :m_info(info), m_id(info.id), m_status(STATUS::TYPE_STOPPED), m_evbase(nullptr), m_streamev(nullptr)
+    StreamManager::StreamManager(const ManagerInfo &info) :m_info(info), m_id(info.id), m_status(STATUS::TYPE_STOPPED), m_evbase(NULL)
     {
         init();
     }
@@ -17,7 +17,7 @@ namespace stream
         if (m_evbase)
         {
             event_base_free(m_evbase);
-            m_evbase = nullptr;
+            m_evbase = NULL;
         }
     }
 
@@ -38,7 +38,7 @@ namespace stream
             return;
         }
 
-        m_future = std::async(std::launch::async, std::bind(&StreamManager::run, this));
+        m_thread = std::thread(std::bind(&StreamManager::run,this));
 
         m_status = STATUS::TYPE_RUNNING;
 
@@ -53,13 +53,10 @@ namespace stream
 
             event_base_loopbreak(m_evbase);
 
-            for (auto &context : m_contexts_rover)
-                context.second->stop();
+            for (auto context = m_contexts_rover.begin(); context != m_contexts_rover.end(); ++context)
+                context->second->stop();
 
-            if (m_future.valid())
-            {
-                m_future.wait();
-            }
+            m_thread.join();
 
             m_status = STATUS::TYPE_STOPPED;
 
@@ -77,16 +74,16 @@ namespace stream
 
         std::string context_base_id;
         std::shared_ptr<StreamContext> context_base;
-        for (const auto &rover  : m_info.rovers)
+        for (auto rover = m_info.rovers.begin(); rover != m_info.rovers.end(); ++rover)
         {
-            m_contexts_rover[rover.id] = std::make_shared<StreamContext>(rover.id, rover, this);
+            m_contexts_rover[rover->id] = std::make_shared<StreamContext>(rover->id, *rover, this);
         }
     }
 
     void StreamManager::run()
     {
-        for (auto &context : m_contexts_rover)
-            context.second->start();
+        for (auto context = m_contexts_rover.begin(); context != m_contexts_rover.end(); ++context)
+            context->second->start();
         event_base_dispatch(m_evbase);
     }
 

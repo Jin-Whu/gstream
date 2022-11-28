@@ -41,20 +41,23 @@ namespace stream
 			StreamLog::set_flag(logflag);
 		}
 
-		for (pugi::xml_node service_node : doc.child("system").children("service"))
+        auto service_nodes = doc.child("system").children("service");
+		for (auto service_node = service_nodes.begin();  service_node != service_nodes.end(); ++service_node)
 		{
 			ServiceInfo serviceinfo;
-			std::string service_id = service_node.child_value("id");
+			std::string service_id = service_node->child_value("id");
 			serviceinfo.id = "SERVICE_" + service_id;
 
-			for (pugi::xml_node manager_node : service_node.children("manager"))
+            auto manager_nodes = service_node->children("manager");
+			for (auto manager_node = manager_nodes.begin(); manager_node != manager_nodes.end(); ++manager_node)
 			{
 				ManagerInfo managerinfo;
-				std::string manager_id = manager_node.child_value("id");
+				std::string manager_id = manager_node->child_value("id");
 				managerinfo.id = "MANAGER_" + service_id + "_" + manager_id;
-				for (pugi::xml_node rover_node : manager_node.children("rover"))
+				auto rovers = manager_node->children("rover");
+				for (auto rover_node = rovers.begin(); rover_node != rovers.end(); ++rover_node)
 				{
-					std::string rover = rover_node.child_value();
+					std::string rover = rover_node->child_value();
 					StreamInfo streaminfo;
 					if (!parse(rover, streaminfo))
 						continue;

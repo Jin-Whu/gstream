@@ -8,7 +8,7 @@
 
 namespace stream
 {
-    Stream::Stream() :m_status(STATUS::TYPE_STOPPED), m_system(nullptr)
+    Stream::Stream() :m_status(STATUS::TYPE_STOPPED), m_system(NULL)
     {
     }
 
@@ -68,18 +68,18 @@ namespace stream
 
 
         // load services
-        for (const auto &service : system_info.services)
+        for (auto service = system_info.services.begin(); service != system_info.services.end(); ++service)
         {
             std::set<std::string> manager_ids;
-            for (const auto &manager : service.managers)
+            for (auto manager = service->managers.begin(); manager != service->managers.end(); ++manager)
             {
-                manager_ids.emplace(manager.id);
+                manager_ids.insert(manager->id);
             }
 
-            m_id[service.id] = std::move(manager_ids);
+            m_id[service->id] = std::move(manager_ids);
         }
 
-        m_system = std::make_unique<StreamSystem>(system_info);
+        m_system = std::unique_ptr<StreamSystem>(new StreamSystem(system_info));
 
         return true;
     }
@@ -100,7 +100,7 @@ namespace stream
         manager->set_streamev(ev);
     }
 
-    const Stream::StreamID& Stream::id() const
+    const StreamID& Stream::id() const
     {
         return m_id;
     }

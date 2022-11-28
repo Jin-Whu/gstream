@@ -23,20 +23,20 @@ namespace stream
             TYPE_RTCM3
         };
 
-        StreamInfo() :StreamData(DATATYPE::TYPE_STREAMINFO) {}
+        StreamInfo() :StreamData(DATATYPE::TYPE_STREAMINFO), stype(StreamType::TYPE_NONE), encode(StreamEncode::TYPE_NONE), port(0), nmea(0), lat(0.), lon(0.), alt(0.) {}
 
-        StreamType stype = StreamType::TYPE_NONE;      /// < stream type
-        StreamEncode encode = StreamEncode::TYPE_NONE;  /// < stream encode
+        StreamType stype;      /// < stream type
+        StreamEncode encode;  /// < stream encode
         std::string id;       /// < stream id
         std::string mnt;      /// < stream mount point
         std::string host;     /// < stream host
-        unsigned port = 0;    /// < stream port
+        unsigned port;    /// < stream port
         std::string user;     /// < stream user
         std::string pwd;      /// < stream password
-        int nmea = 0;             /// < nmea
-        double lat = 0.;      /// < stream lat
-        double lon = 0.;      /// < stream lon
-        double alt = 0.;     /// < stream alt
+        int nmea;             /// < nmea
+        double lat;      /// < stream lat
+        double lon;      /// < stream lon
+        double alt;     /// < stream alt
     };
 }
 
